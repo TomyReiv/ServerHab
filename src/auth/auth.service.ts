@@ -44,7 +44,7 @@ export class AuthService {
 
     } catch (error) {
       if (error.code === 11000) {
-        throw new BadRequestException(`${createUserDto.legajo} already exists`);
+        throw new BadRequestException(`${createUserDto.email} already exists`);
       }
       throw new InternalServerErrorException('Something terrible happen');
     }

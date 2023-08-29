@@ -10,7 +10,7 @@ export class User {
     @Prop({minlength: 6, required: true})
     password?:string;
     @Prop({required: true, unique: true})
-    legajo:string;
+    email:string;
     @Prop({default: true})
     isActive:boolean;
 }

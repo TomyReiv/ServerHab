@@ -5,7 +5,6 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Observable } from 'rxjs';
 import { JwtPayload } from '../interfaces/jwt-payload';
 import { AuthService } from '../auth.service';
 
