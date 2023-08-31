@@ -15,12 +15,13 @@ import { JwtPayload } from './interfaces/jwt-payload';
 import { LoginResponse } from './interfaces/login-response';
 import { RegisterDto, loginDto, UpdateAuthDto, CreateUserDto } from './dto';
 
+
 @Injectable()
 export class AuthService {
   constructor(
     @InjectModel(User.name)
     private userModel: Model<User>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -32,10 +33,6 @@ export class AuthService {
         password: bcryptjs.hashSync(password, 10),
         ...userData,
       });
-
-      //Guardar el usuario
-
-      //Generar el JWT
 
       await newUser.save();
       const {password:_, ...user} = newUser.toJSON();
@@ -61,11 +58,12 @@ export class AuthService {
 
   async login(loginDto:loginDto): Promise<LoginResponse>{
     
-    const {name, password} = loginDto;
+    const {email, password} = loginDto;
 
-    const user = await this.userModel.findOne({name});
+    const user = await this.userModel.findOne({email});
+
     if(!user){
-      throw new UnauthorizedException('Not valid credentials - name');
+      throw new UnauthorizedException('Not valid credentials - email');
     }
 
     if(!bcryptjs.compareSync(password, user.password)){

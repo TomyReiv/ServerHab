@@ -31,14 +31,12 @@ export class AuthController {
 
   @Post('/register')
   Register(@Body() registerDto: RegisterDto) {
-    return this.authService.login(registerDto);
+    return this.authService.register(registerDto);
   }
 
   @UseGuards(AuthGuard)
   @Get()
   findAll(@Request() req: Request) {
-    // const user = req['user'];
-    //return user;
     return this.authService.findAll();
   }
 
